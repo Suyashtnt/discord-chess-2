@@ -9,7 +9,10 @@ members = ["commands", "database", "bot", "events", "utils"]
 [dependencies]
 bot = { path = "bot", package = "bot" }
 database = { path = "database", package = "database" }
-anyhow = "1"
+error-stack = "0.1"
+
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
 [dependencies.tokio]
 version = "1"

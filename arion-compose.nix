@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   flake = builtins.getFlake (toString ./.);
 in
@@ -14,8 +14,11 @@ in
     bot = {
       service.useHostStore = true;
       service.ports = [ "8080:8080" "6669:6669" ];
-      service.command = [ "${flake.packages.x86_64-linux.default}/bin/discord-chess" ];
+      # TODO: fix this race condition
+      service.command = "sh -c '${pkgs.coreutils}/bin/sleep 5 && while !</dev/tcp/postgres/5432; do ${pkgs.coreutils}/bin/sleep 5; done; ${flake.packages.x86_64-linux.default}/bin/discord-chess'";
       service.env_file = [ "bot.env" ];
+      service.restart = "on-failure";
+      image.enableRecommendedContents = true;
 
       service.depends_on = [
         "postgres"

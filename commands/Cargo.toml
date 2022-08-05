@@ -6,9 +6,10 @@ edition = "2021"
 [dependencies]
 database = { path = "../database" }
 tracing = "0.1"
+error-stack = "0.1"
 
 [dependencies.poise]
-git = "https://github.com/kangalioo/poise"
+version = "0.3"
 features = ["time"]
 
 [dependencies.serenity]
@@ -20,7 +21,6 @@ features = [
 	"builder",
 	"cache",
 	"rustls_backend",
-	"framework",
 	"gateway",
 	"model",
 	"http",
