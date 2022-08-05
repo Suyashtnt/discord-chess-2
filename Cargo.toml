@@ -1,0 +1,16 @@
+[package]
+name = "discord-chess"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = ["commands", "database", "bot", "events", "utils"]
+
+[dependencies]
+bot = { path = "bot", package = "bot" }
+database = { path = "database", package = "database" }
+anyhow = "1"
+
+[dependencies.tokio]
+version = "1"
+features = ["rt-multi-thread", "macros"]

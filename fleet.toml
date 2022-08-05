@@ -1,0 +1,5 @@
+rd_enabled = true
+fleet_id = "057c304f-8258-4034-ac6e-3038acf26ecb"
+
+[build]
+sccache = "/home/tntman/.cargo/bin/sccache"

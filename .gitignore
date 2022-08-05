@@ -1,0 +1,8 @@
+/target
+/registry
+*.env
+/database/.env
+/.direnv
+
+# this is from docker postgres
+/db

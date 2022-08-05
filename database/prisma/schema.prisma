@@ -1,0 +1,67 @@
+generator client {
+        provider = "cargo run"
+        output   = "../src/lib/prisma.rs"
+}
+
+datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+}
+
+model User {
+        /// This matches the users discord ID
+        id String @id
+
+        /// When did this user start playing
+        startedPlaying DateTime @default(now())
+
+        /// the current ELO of the user based on glicko 2
+        elo Int @default(1000)
+
+        /// The games the user played as white
+        whiteGames Game[] @relation(name: "whiteGames")
+
+        /// The games the user played as black
+        blackGames Game[] @relation(name: "blackGames")
+}
+
+model Game {
+        id String @id @default(cuid())
+
+        /// Who played as white
+        white User @relation(fields: [whiteId], references: [id], name: "whiteGames")
+        /// Who played as black
+        black User @relation(fields: [blackId], references: [id], name: "blackGames")
+
+        /// Whites user ID
+        whiteId String
+        /// Blacks user ID
+        blackId String
+
+        /// Outcome for white
+        whiteOutcome Outcome
+        /// Outcome for black
+        blackOutcome Outcome
+
+        /// ELO for white when this game was played
+        whiteElo Int
+
+        /// ELO for black when this game was played
+        blackElo Int
+
+        /// Initial state of the board as FEN
+        initalBoard  String
+        /// The current state of the board as FEN
+        currentBoard String
+
+        /// List of moves in standard algebreic notation
+        moveList String[]
+}
+
+enum Outcome {
+        WIN
+        LOSS
+        DRAW
+        /// Game is still ongoing
+        UNDECIDED
+}
