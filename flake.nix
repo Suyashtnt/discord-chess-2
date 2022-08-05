@@ -72,12 +72,6 @@
           # chess-audit = craneLib.cargoAudit {
           #   inherit src advisory-db;
           # };
-
-          chess-nextest = craneLib.cargoNextest {
-            inherit cargoArtifacts src;
-            partitions = 1;
-            partitionType = "count";
-          };
         } // lib.optionalAttrs (system == "x86_64-linux") {
           chess-coverage = craneLib.cargoTarpaulin (commonArgs // {
             inherit cargoArtifacts;
