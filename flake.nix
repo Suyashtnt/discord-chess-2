@@ -74,11 +74,12 @@
           #   inherit src advisory-db;
           # };
 
-          chess-nextest = craneLib.cargoNextest {
-            inherit cargoArtifacts src;
-            partitions = 1;
-            partitionType = "count";
-          };
+          # https://github.com/ipetkov/crane/issues/54
+          # chess-nextest = craneLib.cargoNextest (commonArgs // {
+          #   inherit cargoArtifacts src;
+          #   partitions = 1;
+          #   partitionType = "count";
+          # });
         } // lib.optionalAttrs (system == "x86_64-linux") {
           chess-coverage = craneLib.cargoTarpaulin (commonArgs // {
             inherit cargoArtifacts;
