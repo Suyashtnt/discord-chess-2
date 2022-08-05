@@ -10,6 +10,7 @@ pub async fn test(
 ) -> Result<(), CommandError> {
     let u = user.as_ref().unwrap_or_else(|| ctx.author());
     let response = format!("{}'s account was created at {}", u.name, u.created_at());
+
     ctx.say(response)
         .await
         .report()
@@ -18,5 +19,6 @@ pub async fn test(
             &ctx,
             vec![Arg::User("user".to_string(), u.id)],
         ))?;
+
     Ok(())
 }
