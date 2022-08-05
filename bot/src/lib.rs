@@ -1,7 +1,7 @@
 use std::env::var;
 
 use anyhow::Context;
-use poise::{serenity_prelude as serenity, Framework, FrameworkOptions, FrameworkBuilder};
+use poise::{serenity_prelude as serenity, Framework, FrameworkBuilder, FrameworkOptions};
 use tracing::info;
 
 pub fn entrypoint() -> anyhow::Result<()> {
@@ -19,9 +19,8 @@ pub fn entrypoint() -> anyhow::Result<()> {
         .intents(serenity::GatewayIntents::non_privileged());
 
     tokio::spawn(framework.run());
-    
+
     info!("Successfully initialised bot");
 
     Ok(())
 }
-

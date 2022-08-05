@@ -7,7 +7,7 @@ in
     postgres = {
       service.image = "postgres:latest";
       service.env_file = [ "db.env" ];
-      service.command = [ "${flake.chess.x86_64-linux}/bin/discord-chess" ];
+      service.command = [ "${flake.packages.x86_64-linux.default}/bin/discord-chess" ];
       service.volumes = [ "${toString ./.}/db:/var/lib/postgresql/data" ];
       service.ports = [ "5432:5432" ];
     };
