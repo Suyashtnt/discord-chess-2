@@ -7,7 +7,7 @@ in
     postgres = {
       service.image = "postgres:latest";
       service.env_file = [ "db.env" ];
-      service.volumes = [ "${toString ./.}/db:/var/lib/postgresql/data" ];
+      service.volumes = [ "${toString ./.}/postgresql-data:/var/lib/postgresql/data" ];
       service.ports = [ "5432:5432" ];
     };
 

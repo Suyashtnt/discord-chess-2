@@ -5,4 +5,4 @@
 /.direnv
 
 # this is from docker postgres
-/db
+/postgresql-data
