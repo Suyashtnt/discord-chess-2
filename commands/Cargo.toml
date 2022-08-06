@@ -26,3 +26,6 @@ features = [
 	"http",
 	"utils",
 ]
+
+[dev-dependencies]
+pretty_assertions = "1"

@@ -30,8 +30,6 @@
         inherit (pkgs) lib;
 
         craneLib = crane.lib.${system};
-        src = ./.;
-
         commonArgs = {
           src = ./.;
 
@@ -74,15 +72,18 @@
           #   inherit src advisory-db;
           # };
 
-          # https://github.com/ipetkov/crane/issues/54
-          # chess-nextest = craneLib.cargoNextest (commonArgs // {
-          #   inherit cargoArtifacts src;
-          #   partitions = 1;
-          #   partitionType = "count";
-          # });
+          chess-nextest = craneLib.cargoNextest (commonArgs // {
+            inherit cargoArtifacts;
+            partitions = 1;
+            partitionType = "count";
+            cargoNextestExtraArgs = "--workspace";
+          });
         } // lib.optionalAttrs (system == "x86_64-linux") {
           chess-coverage = craneLib.cargoTarpaulin (commonArgs // {
             inherit cargoArtifacts;
+            cargoTarpaulinExtraArgs = "--workspace";
+
+            CARGO_PROFILE = "dev";
           });
         };
 
