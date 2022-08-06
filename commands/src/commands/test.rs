@@ -7,7 +7,7 @@ pub fn get_user_age_msg(username: &str, user_age: &Timestamp) -> String {
     format!("{}'s account was created at {}", username, user_age)
 }
 
-async fn test_logic(ctx: &Context<'_>, user: &serenity::User) -> Result<(), CommandError> {
+async fn test_cmd_logic(ctx: &Context<'_>, user: &serenity::User) -> Result<(), CommandError> {
     let response = get_user_age_msg(&user.name, &user.created_at());
 
     ctx.say(response)
@@ -30,13 +30,13 @@ pub async fn test_slash(
     #[description = "Selected user"] user: Option<serenity::User>,
 ) -> Result<(), CommandError> {
     let u = user.as_ref().unwrap_or_else(|| ctx.author());
-    test_logic(&ctx, u).await
+    test_cmd_logic(&ctx, u).await
 }
 
 /// Simple test command that displays when an account was created
 #[poise::command(context_menu_command = "Test")]
 pub async fn test_user(ctx: Context<'_>, user: serenity::User) -> Result<(), CommandError> {
-    test_logic(&ctx, &user).await
+    test_cmd_logic(&ctx, &user).await
 }
 
 #[cfg(test)]
