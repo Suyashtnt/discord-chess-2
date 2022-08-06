@@ -36,6 +36,7 @@
           buildInputs = with pkgs; [
             openssl
             zlib
+            stockfish
           ];
 
           nativeBuildInputs = with pkgs; [

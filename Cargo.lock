@@ -423,6 +423,8 @@ dependencies = [
  "poise",
  "pretty_assertions",
  "serenity",
+ "shakmaty",
+ "state",
  "tracing",
 ]
 
@@ -808,6 +810,7 @@ dependencies = [
  "bot",
  "database",
  "error-stack",
+ "state",
  "tokio",
  "tracing",
  "tracing-subscriber",
@@ -3465,6 +3468,15 @@ dependencies = [
  "tracing-opentelemetry",
  "user-facing-errors",
  "uuid",
+]
+
+[[package]]
+name = "state"
+version = "0.1.0"
+dependencies = [
+ "error-stack",
+ "once_cell",
+ "shakmaty",
 ]
 
 [[package]]

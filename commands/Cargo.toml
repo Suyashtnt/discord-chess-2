@@ -5,8 +5,10 @@ edition = "2021"
 
 [dependencies]
 database = { path = "../database" }
+state = { path = "../state" }
 tracing = "0.1"
 error-stack = "0.1"
+shakmaty = "0.21"
 
 [dependencies.poise]
 version = "0.3"

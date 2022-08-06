@@ -32,7 +32,7 @@ impl Display for CommandError {
 }
 
 impl CommandError {
-    pub fn from_ctx(ctx: &Context<'_>, args: Vec<Arg>, game_id: Option<String>) -> Self {
+    pub fn from_cmd(ctx: &Context<'_>, args: Vec<Arg>, game_id: Option<String>) -> Self {
         Self {
             name: ctx.command().name.clone(),
             runner: ctx.author().id,

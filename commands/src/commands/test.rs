@@ -14,7 +14,7 @@ async fn test_cmd_logic(ctx: &Context<'_>, user: &serenity::User) -> Result<(), 
         .await
         .report()
         .attach_printable("Could not send user age!")
-        .change_context(CommandError::from_ctx(
+        .change_context(CommandError::from_cmd(
             &ctx,
             vec![Arg::User("user".to_string(), user.id)],
             None,
@@ -48,6 +48,7 @@ mod tests {
     fn can_create_string() {
         let timestamp =
             Timestamp::parse("2019-02-10T16:34:35.279Z").expect("Could not parse timestamp");
+
         let expected = "Tabiasgee Human's account was created at 2019-02-10T16:34:35.279Z";
         let result = get_user_age_msg("Tabiasgee Human", &timestamp);
 

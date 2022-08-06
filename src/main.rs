@@ -18,6 +18,7 @@ async fn main() -> Result<(), StartupError> {
 
     tracing_subscriber::registry().with(fmt_layer).init();
 
+    state::entrypoint().change_context(StartupError)?;
     database::entrypoint().await.change_context(StartupError)?;
     let handle = bot::entrypoint().change_context(StartupError)?;
 
