@@ -14,9 +14,9 @@ async fn test_cmd_logic(ctx: &Context<'_>, user: &serenity::User) -> Result<(), 
         .await
         .report()
         .attach_printable("Could not send user age!")
+        .attach(Arg::User("user".to_string(), user.id))
         .change_context(CommandError::from_cmd(
             &ctx,
-            vec![Arg::User("user".to_string(), user.id)],
             None,
         ))?;
 

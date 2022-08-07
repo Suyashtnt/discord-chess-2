@@ -98,9 +98,9 @@
           inputsFrom = builtins.attrValues self.checks;
 
           packages = with pkgs; [
-            (rust-bin.stable.latest.default.override {
+            (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
               extensions = [ "rustfmt" ];
-            })
+            }))
 
             nodejs
             nodePackages.prisma

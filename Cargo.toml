@@ -10,7 +10,7 @@ members = ["commands", "database", "bot", "events", "utils", "state"]
 bot = { path = "bot", package = "bot" }
 database = { path = "database", package = "database" }
 state = { path = "state", package = "state" }
-error-stack = "0.1"
+error-stack = { git = "https://github.com/hashintel/hash" }
 
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }

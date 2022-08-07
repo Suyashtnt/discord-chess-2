@@ -6,3 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+commands = { path = "../commands" }
+poise = "0.3"
+tracing = "0.1"
+error-stack = { git = "https://github.com/hashintel/hash" }

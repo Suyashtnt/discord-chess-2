@@ -9,19 +9,14 @@ async fn new_game_logic(
     opponent: &serenity::User,
     player_side: Color,
 ) -> Result<(), CommandError> {
-    let cmderr = CommandError::from_cmd(
-        &ctx,
-        vec![
-            Arg::User("opponent".to_string(), opponent.id),
-            Arg::String("side".to_string(), (&player_side).to_string()),
-        ],
-        None,
-    );
+    let cmderr = CommandError::from_cmd(&ctx, None);
 
     ctx.say("Creating game... NOTE: DOES NOTHING RN")
         .await
         .report()
         .attach_printable("Could not send user age!")
+        .attach(Arg::User("opponent".to_string(), opponent.id))
+        .attach(Arg::String("side".to_string(), (&player_side).to_string()))
         .change_context(cmderr)?;
 
     Ok(())
@@ -36,14 +31,7 @@ pub async fn new_game_slash(
 ) -> Result<(), CommandError> {
     let side = side.unwrap_or("white".to_string());
 
-    let cmderr = CommandError::from_cmd(
-        &ctx,
-        vec![
-            Arg::User("opponent".to_string(), opponent.id),
-            Arg::String("side".to_string(), side.clone()),
-        ],
-        None,
-    );
+    let cmderr = CommandError::from_cmd(&ctx, None);
 
     let color = match &*side.to_lowercase() {
         "b" => Color::Black,
@@ -51,10 +39,13 @@ pub async fn new_game_slash(
         "w" => Color::White,
         "white" => Color::White,
         _ => {
-            return Err(report!(cmderr).attach_printable(format!(
-                "Could not figure out side based on `{}`",
-                side.clone()
-            )))
+            return Err(report!(cmderr)
+                .attach_printable(format!(
+                    "Could not figure out side based on `{}`",
+                    side.clone()
+                ))
+                .attach(Arg::User("opponent".to_string(), opponent.id))
+                .attach(Arg::String("side".to_string(), (&side).to_string())))
         }
     };
 

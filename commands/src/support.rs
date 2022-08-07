@@ -16,13 +16,18 @@ pub enum Arg {
 }
 
 #[derive(Debug)]
+/// An error happened when running a command
 pub struct CommandError {
+    /// The command name
     pub name: String,
+    /// The runner of the command
     pub runner: serenity::UserId,
+    /// the guild the command was ran in
     pub guild: Option<serenity::GuildId>,
+    /// The channel the command was ran in
     pub channel: serenity::ChannelId,
+    /// The game ID if this command had a game
     pub game_id: Option<String>,
-    pub args: Vec<Arg>,
 }
 
 impl Display for CommandError {
@@ -32,14 +37,13 @@ impl Display for CommandError {
 }
 
 impl CommandError {
-    pub fn from_cmd(ctx: &Context<'_>, args: Vec<Arg>, game_id: Option<String>) -> Self {
+    pub fn from_cmd(ctx: &Context<'_>, game_id: Option<String>) -> Self {
         Self {
             name: ctx.command().name.clone(),
             runner: ctx.author().id,
             guild: ctx.guild_id(),
             channel: ctx.channel_id(),
             game_id,
-            args,
         }
     }
 }

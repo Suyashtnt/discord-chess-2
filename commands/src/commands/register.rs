@@ -8,7 +8,7 @@ pub async fn register(ctx: Context<'_>) -> Result<(), CommandError> {
         .await
         .report()
         .attach_printable("Could not do registration")
-        .change_context(CommandError::from_cmd(&ctx, vec![], None))?;
+        .change_context(CommandError::from_cmd(&ctx, None))?;
 
     Ok(())
 }

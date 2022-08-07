@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 tracing = "0.1"
-error-stack = "0.1"
+error-stack = { git = "https://github.com/hashintel/hash" }
 commands = { path = "../commands" }
 tokio = "1"
 
