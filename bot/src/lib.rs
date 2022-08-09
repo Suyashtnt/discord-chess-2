@@ -29,7 +29,7 @@ pub fn entrypoint() -> ErrRes<JoinHandle<Result<(), SerenityError>>, BotInitErro
     let framework = Framework::builder()
         .token(
             var("DISCORD_TOKEN")
-                .report()
+                .into_report()
                 .attach_printable("Could not get bot token")
                 .change_context(BotInitError)?,
         )
