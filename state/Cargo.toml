@@ -6,4 +6,4 @@ edition = "2021"
 [dependencies]
 shakmaty = "0.21"
 once_cell = "1"
-error-stack = { git = "https://github.com/hashintel/hash", branch = "td/bump-toolchain" }
+error-stack = { git = "https://github.com/hashintel/hash" }

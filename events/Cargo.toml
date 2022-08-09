@@ -9,4 +9,4 @@ edition = "2021"
 commands = { path = "../commands" }
 poise = "0.3"
 tracing = "0.1"
-error-stack = { git = "https://github.com/hashintel/hash", branch = "td/bump-toolchain" }
+error-stack = { git = "https://github.com/hashintel/hash" }

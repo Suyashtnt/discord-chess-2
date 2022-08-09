@@ -923,7 +923,7 @@ dependencies = [
 [[package]]
 name = "error-stack"
 version = "0.1.1"
-source = "git+https://github.com/hashintel/hash?branch=td/bump-toolchain#81e32c717f3e7088ea63d572df17f40d87462eb3"
+source = "git+https://github.com/hashintel/hash#5edddb5566f9bd82dcdf9ba3b430759bc6b15dc5"
 dependencies = [
  "anyhow",
  "once_cell",
