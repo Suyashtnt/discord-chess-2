@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  postgres:
+    image: "postgres:latest"
+    env_file:
+      - db.env
+    volumes:
+      - "db:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+  bot:
+    image: ./result
+    env_file:
+      - bot.env
+    ports:
+      - "8080:8080"
+      - "6669:6669"
+    restart: "on-failure"
+    depends_on:
+      - postgres
+
+volumes:
+  db:

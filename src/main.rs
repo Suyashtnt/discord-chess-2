@@ -24,10 +24,10 @@ async fn main() -> Result<(), StartupError> {
 
     handle
         .await
-        .report()
+        .into_report()
         .attach_printable("Failed to join bot handle")
         .change_context(StartupError)?
-        .report()
+        .into_report()
         .attach_printable("Failed to start bot")
         .change_context(StartupError)?;
     Ok(())

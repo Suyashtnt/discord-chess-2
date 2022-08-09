@@ -3,6 +3,7 @@
 *.env
 /database/.env
 /.direnv
+result
 
 # this is from docker postgres
 /postgresql-data

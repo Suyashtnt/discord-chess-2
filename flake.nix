@@ -90,6 +90,14 @@
 
         packages.default = chess;
 
+        packages.docker = pkgs.dockerTools.buildImage {
+          name = "discord-chess-docker";
+          config = {
+            # TODO: fix this race condition
+            Cmd = [ "sh -c '${pkgs.coreutils}/bin/sleep 5 && while !</dev/tcp/postgres/5432; do ${pkgs.coreutils}/bin/sleep 5; done; ${chess}/bin/discord-chess" ];
+          };
+        };
+
         apps.default = flake-utils.lib.mkApp {
           drv = chess;
         };

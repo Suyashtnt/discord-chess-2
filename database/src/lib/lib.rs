@@ -28,7 +28,7 @@ pub async fn entrypoint() -> Result<(), DatabaseInitError> {
         .set(
             new_client()
                 .await
-                .report()
+                .into_report()
                 .attach_printable("Could not connect to the database!")
                 .change_context(DatabaseInitError)?,
         )

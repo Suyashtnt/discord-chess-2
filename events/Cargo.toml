@@ -9,4 +9,4 @@ edition = "2021"
 commands = { path = "../commands" }
 poise = "0.3"
 tracing = "0.1"
-error-stack = { git = "https://github.com/hashintel/hash" }
+error-stack = { git = "https://github.com/hashintel/hash", rev = "a5baa2c97b528f2551e807aa7faa88c124a9942c" }

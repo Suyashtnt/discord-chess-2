@@ -35,7 +35,7 @@ pub fn entrypoint() -> Result<(), StateInitError> {
     GAMES
         .set(Mutex::from(vec![]))
         .map_err(|_| StateInitError)
-        .report()
+        .into_report()
         .attach_printable("Could not set GAMES state")?;
 
     Ok(())

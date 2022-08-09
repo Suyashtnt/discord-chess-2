@@ -13,7 +13,7 @@ async fn new_game_logic(
 
     ctx.say("Creating game... NOTE: DOES NOTHING RN")
         .await
-        .report()
+        .into_report()
         .attach_printable("Could not send user age!")
         .attach(Arg::User("opponent".to_string(), opponent.id))
         .attach(Arg::String("side".to_string(), (&player_side).to_string()))

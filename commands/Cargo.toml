@@ -7,7 +7,7 @@ edition = "2021"
 database = { path = "../database" }
 state = { path = "../state" }
 tracing = "0.1"
-error-stack = { git = "https://github.com/hashintel/hash" }
+error-stack = { git = "https://github.com/hashintel/hash", rev = "a5baa2c97b528f2551e807aa7faa88c124a9942c" }
 shakmaty = "0.21"
 
 [dependencies.poise]

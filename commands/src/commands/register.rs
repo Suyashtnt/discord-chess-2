@@ -6,7 +6,7 @@ use crate::support::{CommandError, Context};
 pub async fn register(ctx: Context<'_>) -> Result<(), CommandError> {
     poise::builtins::register_application_commands_buttons(ctx)
         .await
-        .report()
+        .into_report()
         .attach_printable("Could not do registration")
         .change_context(CommandError::from_cmd(&ctx, None))?;
 
