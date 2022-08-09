@@ -9,14 +9,14 @@ async fn new_game_logic(
     opponent: &serenity::User,
     player_side: Color,
 ) -> Result<(), CommandError> {
-    let cmderr = CommandError::from_cmd(&ctx, None);
+    let cmderr = CommandError::from_cmd(ctx, None);
 
     ctx.say("Creating game... NOTE: DOES NOTHING RN")
         .await
         .into_report()
         .attach_printable("Could not send user age!")
         .attach(Arg::User("opponent".to_string(), opponent.id))
-        .attach(Arg::String("side".to_string(), (&player_side).to_string()))
+        .attach(Arg::String("side".to_string(), player_side.to_string()))
         .change_context(cmderr)?;
 
     Ok(())
@@ -29,7 +29,7 @@ pub async fn new_game_slash(
     #[description = "User to face against"] opponent: serenity::User,
     #[description = "The colour you want to play as. Default is white"] side: Option<String>,
 ) -> Result<(), CommandError> {
-    let side = side.unwrap_or("white".to_string());
+    let side = side.unwrap_or_else(|| "white".to_string());
 
     let cmderr = CommandError::from_cmd(&ctx, None);
 
@@ -45,7 +45,7 @@ pub async fn new_game_slash(
                     side.clone()
                 ))
                 .attach(Arg::User("opponent".to_string(), opponent.id))
-                .attach(Arg::String("side".to_string(), (&side).to_string())))
+                .attach(Arg::String("side".to_string(), side.to_string())))
         }
     };
 
