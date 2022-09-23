@@ -31,6 +31,7 @@ impl Display for StateInitError {
 
 impl Context for StateInitError {}
 
+/// Initialize the state values for the bot
 pub fn entrypoint() -> Result<(), StateInitError> {
     GAMES
         .set(Mutex::from(vec![]))

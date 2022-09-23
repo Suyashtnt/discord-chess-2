@@ -1,8 +1,8 @@
-use error_stack::{Context as ErrContext, Report};
+use error_stack::{Context as ErrContext, IntoReport, Report, ResultExt};
 use poise::{self, serenity_prelude as serenity};
 use std::fmt::Display;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum Arg {
     String(String, String),
     User(String, serenity::UserId),
@@ -15,7 +15,7 @@ pub enum Arg {
     Attachment(String, serenity::Attachment),
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 /// An error happened when running a command
 pub struct CommandError {
     /// The command name
@@ -51,3 +51,34 @@ impl CommandError {
 impl ErrContext for CommandError {}
 
 pub type Context<'a> = poise::Context<'a, (), Report<CommandError>>;
+
+#[derive(Clone)]
+pub struct CmdErrorReporter {
+    args: Vec<Arg>,
+    cmd_err: CommandError,
+}
+
+impl CmdErrorReporter
+{
+    pub fn report<V, E, S>(self, err: Result<V, E>, reason: S) -> Result<V, Report<CommandError>>
+    where
+        Report<E>: From<E>,
+        S: ToString
+    {
+        let mut new_err = err.into_report();
+        for arg in self.args {
+            new_err = new_err.attach(arg);
+        }
+        new_err
+            .attach_printable(reason.to_string())
+            .change_context(self.cmd_err)
+    }
+}
+
+pub fn create_cmd_error_reporter(
+    args: Vec<Arg>,
+    cmd_err: CommandError,
+) -> CmdErrorReporter
+{
+    CmdErrorReporter { args, cmd_err }
+}

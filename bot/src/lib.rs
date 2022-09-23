@@ -1,3 +1,4 @@
+use events::on_error;
 use poise::serenity_prelude::SerenityError;
 use std::{env::var, fmt::Display};
 
@@ -23,6 +24,7 @@ pub fn entrypoint() -> ErrRes<JoinHandle<Result<(), SerenityError>>, BotInitErro
 
     let opts = FrameworkOptions {
         commands: commands::create_command_list(),
+        on_error: |e| Box::pin(on_error(e)),
         ..Default::default()
     };
 

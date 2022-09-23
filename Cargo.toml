@@ -10,11 +10,39 @@ members = ["commands", "database", "bot", "events", "utils", "state"]
 bot = { path = "bot", package = "bot" }
 database = { path = "database", package = "database" }
 state = { path = "state", package = "state" }
-error-stack = { git = "https://github.com/hashintel/hash" }
 
+error-stack.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+once_cell.workspace = true
+tokio.workspace = true
+
+[workspace.dependencies]
+error-stack = { git = "https://github.com/hashintel/hash" }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+shakmaty = "0.22"
+once_cell = "1"
 
-[dependencies.tokio]
+[workspace.dependencies.tokio]
 version = "1"
 features = ["rt-multi-thread", "macros"]
+
+[workspace.dependencies.poise]
+version = "0.3"
+features = ["time"]
+
+[workspace.dependencies.serenity]
+version = "0.11"
+default-features = false
+
+features = [
+	"time",
+	"builder",
+	"cache",
+	"rustls_backend",
+	"gateway",
+	"model",
+	"http",
+	"utils",
+]

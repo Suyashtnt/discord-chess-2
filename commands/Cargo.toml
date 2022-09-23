@@ -6,28 +6,12 @@ edition = "2021"
 [dependencies]
 database = { path = "../database" }
 state = { path = "../state" }
-tracing = "0.1"
-error-stack = { git = "https://github.com/hashintel/hash" }
-shakmaty = "0.21"
 
-[dependencies.poise]
-version = "0.3"
-features = ["time"]
-
-[dependencies.serenity]
-version = "0.11"
-default-features = false
-
-features = [
-	"time",
-	"builder",
-	"cache",
-	"rustls_backend",
-	"gateway",
-	"model",
-	"http",
-	"utils",
-]
+tracing.workspace = true
+error-stack.workspace = true
+shakmaty.workspace = true
+poise.workspace = true
+serenity.workspace = true
 
 [dev-dependencies]
 pretty_assertions = "1"

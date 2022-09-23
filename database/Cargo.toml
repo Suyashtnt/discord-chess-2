@@ -10,9 +10,10 @@ path = "src/lib/lib.rs"
 [dependencies]
 prisma-client-rust = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.5.2" }
 prisma-client-rust-cli = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.5.2" }
-once_cell = "1"
-error-stack = { git = "https://github.com/hashintel/hash" }
-tracing = "0.1"
+
+once_cell.workspace = true
+error-stack.workspace = true
+tracing.workspace = true
 
 [dependencies.serde]
 version = "1"

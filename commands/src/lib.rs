@@ -12,7 +12,7 @@ pub fn create_command_list() -> Vec<Command<(), Report<CommandError>>> {
         register(),
         test_slash(),
         test_user(),
-        new_game_slash(),
+        new_game(),
         new_game_user(),
     ]
 }

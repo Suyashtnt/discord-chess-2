@@ -7,6 +7,6 @@ edition = "2021"
 
 [dependencies]
 commands = { path = "../commands" }
-poise = "0.3"
-tracing = "0.1"
-error-stack = { git = "https://github.com/hashintel/hash" }
+poise.workspace = true
+tracing.workspace = true
+error-stack.workspace = true

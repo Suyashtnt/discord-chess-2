@@ -11,7 +11,7 @@ services:
       - "5432:5432"
 
   bot:
-    image: ./result
+    image: "discord-chess:0.1.0"
     env_file:
       - bot.env
     ports:

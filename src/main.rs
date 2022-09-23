@@ -25,7 +25,6 @@ async fn main() -> Result<(), StartupError> {
     handle
         .await
         .into_report()
-        .attach_printable("Failed to join bot handle")
         .change_context(StartupError)?
         .into_report()
         .attach_printable("Failed to start bot")

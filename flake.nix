@@ -26,10 +26,13 @@
         pkgs = import nixpkgs {
           inherit system overlays;
         };
+        rustNightly = (pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
+          extensions = [ "rustfmt" ];
+        }));
 
         inherit (pkgs) lib;
 
-        craneLib = crane.lib.${system};
+        craneLib = (crane.mkLib pkgs).overrideToolchain rustNightly;
         commonArgs = {
           src = ./.;
 
@@ -91,10 +94,16 @@
         packages.default = chess;
 
         packages.docker = pkgs.dockerTools.buildImage {
-          name = "discord-chess-docker";
+          name = chess.pname;
+          tag = chess.version;
+          copyToRoot = pkgs.buildEnv {
+            name = "discord-chess-pkgs";
+            paths = with pkgs; [ bash chess ];
+            pathsToLink = [ "/share" "/bin" ];
+          };
           config = {
             # TODO: fix this race condition
-            Cmd = [ "sh -c '${pkgs.coreutils}/bin/sleep 5 && while !</dev/tcp/postgres/5432; do ${pkgs.coreutils}/bin/sleep 5; done; ${chess}/bin/discord-chess" ];
+            Cmd = [ "/bin/discord-chess" ];
           };
         };
 
@@ -106,9 +115,7 @@
           inputsFrom = builtins.attrValues self.checks;
 
           packages = with pkgs; [
-            (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
-              extensions = [ "rustfmt" ];
-            }))
+            rustNightly
 
             nodejs
             nodePackages.prisma

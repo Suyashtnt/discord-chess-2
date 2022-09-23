@@ -9,7 +9,7 @@ pub async fn on_error(error: poise::FrameworkError<'_, (), Report<CommandError>>
         poise::FrameworkError::Setup { error, .. } => panic!("Failed to start bot: {:?}", error),
         poise::FrameworkError::Command { error, ctx } => {
             error!(
-                "{error:?}\nHere are the args: \n{}",
+                "{error:?}\n\nArgs:\n{}",
                 error
                     .request_ref::<commands::Arg>()
                     .fold("".to_string(), |acc, arg| acc
@@ -33,7 +33,7 @@ pub async fn on_error(error: poise::FrameworkError<'_, (), Report<CommandError>>
                     m.embed(|e| {
                         e.title("!ERROR! !ERROR! !ABORT! !ERROR! !ERROR!")
                             .description(format!(
-                                "An error occured when running command {}\n\nThe details of the error are provided below\n**Actual error**\n{:?}",
+                                "An error occured when running command {}\n```{:?}```",
                                 error.current_context().name,
                                 error
                             ));

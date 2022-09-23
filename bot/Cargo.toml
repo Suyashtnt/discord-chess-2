@@ -6,12 +6,10 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tracing = "0.1"
-error-stack = { git = "https://github.com/hashintel/hash" }
+tracing.workspace = true
+error-stack.workspace = true
+tokio.workspace = true
+poise.workspace = true
+
 commands = { path = "../commands" }
-
-tokio = "1"
-
-[dependencies.poise]
-version = "0.3"
-features = ["time"]
+events = { path = "../events" }
