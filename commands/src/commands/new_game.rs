@@ -142,8 +142,8 @@ async fn new_game_logic<'a>(
 
 /// Challenge a user to a chess match
 #[poise::command(slash_command)]
-pub async fn new_game<'a>(
-    ctx: Context<'a>,
+pub async fn new_game(
+    ctx: Context<'_>,
     #[description = "User to face against"] opponent: serenity::User,
     #[description = "The colour you want to play as. Default is white"] side: Option<String>,
 ) -> Result<(), CommandError> {

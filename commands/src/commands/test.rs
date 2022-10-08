@@ -1,5 +1,5 @@
 use error_stack::Result;
-use poise::serenity_prelude::{self as serenity, Timestamp};
+use poise::serenity_prelude::{self as serenity, Timestamp, Mentionable};
 
 use crate::support::{create_cmd_error_reporter, Arg, CommandError, Context};
 
@@ -7,17 +7,17 @@ pub fn get_user_age_msg(username: &str, user_age: &Timestamp) -> String {
     format!("{}'s account was created at {}", username, user_age)
 }
 
-async fn test_cmd_logic<'a>(
-    ctx: &Context<'a>,
-    user: &serenity::User,
-) -> Result<(), CommandError> {
+async fn test_cmd_logic<'a>(ctx: &Context<'a>, user: &serenity::User) -> Result<(), CommandError> {
     let response = get_user_age_msg(&user.name, &user.created_at());
     let reporter = create_cmd_error_reporter(
         vec![Arg::User("user".to_string(), user.id)],
-        CommandError::from_cmd(&ctx, None),
+        CommandError::from_cmd(ctx, None),
     );
 
-    reporter.report(ctx.say(response).await, "Could not send user age!")?;
+    reporter.report(
+        ctx.say(response).await,
+        format!("Could not send user {} age!", user.mention()),
+    )?;
 
     Ok(())
 }

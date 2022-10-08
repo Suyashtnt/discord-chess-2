@@ -58,12 +58,11 @@ pub struct CmdErrorReporter {
     cmd_err: CommandError,
 }
 
-impl CmdErrorReporter
-{
+impl CmdErrorReporter {
     pub fn report<V, E, S>(self, err: Result<V, E>, reason: S) -> Result<V, Report<CommandError>>
     where
         Report<E>: From<E>,
-        S: ToString
+        S: ToString,
     {
         let mut new_err = err.into_report();
         for arg in self.args {
@@ -75,10 +74,6 @@ impl CmdErrorReporter
     }
 }
 
-pub fn create_cmd_error_reporter(
-    args: Vec<Arg>,
-    cmd_err: CommandError,
-) -> CmdErrorReporter
-{
+pub fn create_cmd_error_reporter(args: Vec<Arg>, cmd_err: CommandError) -> CmdErrorReporter {
     CmdErrorReporter { args, cmd_err }
 }

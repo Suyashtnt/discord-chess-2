@@ -40,15 +40,31 @@ pub async fn on_error(error: poise::FrameworkError<'_, (), Report<CommandError>>
 
                         for arg in error.request_ref::<commands::Arg>() {
                             let (name, value) = match arg {
-                                commands::Arg::String(n, v) => (format!("String `{n}`"),v.to_owned()),
-                                commands::Arg::User(n, v) => (format!("User `{n}`"),v.mention().to_string()),
-                                commands::Arg::Int(n, v) => (format!("Int `{n}`"),v.to_string()),
-                                commands::Arg::Number(n, v) => (format!("Int `{n}`"), v.to_string()),
-                                commands::Arg::Boolean(n, v) => (format!("Bool `{n}`"), v.to_string()),
-                                commands::Arg::Channel(n, v) => (format!("Channel `{n}`"), v.mention().to_string()),
-                                commands::Arg::Role(n, v) => (format!("Role `{n}`"), v.mention().to_string()),
-                                commands::Arg::Mentionable(n, v) => (format!("Mentionable `{n}`"), v.mention().to_string()),
-                                commands::Arg::Attachment(n, v) => (format!("Attachment `{n}`"), v.url.to_owned()),
+                                commands::Arg::String(n, v) => {
+                                    (format!("String `{n}`"), v.to_owned())
+                                }
+                                commands::Arg::User(n, v) => {
+                                    (format!("User `{n}`"), v.mention().to_string())
+                                }
+                                commands::Arg::Int(n, v) => (format!("Int `{n}`"), v.to_string()),
+                                commands::Arg::Number(n, v) => {
+                                    (format!("Int `{n}`"), v.to_string())
+                                }
+                                commands::Arg::Boolean(n, v) => {
+                                    (format!("Bool `{n}`"), v.to_string())
+                                }
+                                commands::Arg::Channel(n, v) => {
+                                    (format!("Channel `{n}`"), v.mention().to_string())
+                                }
+                                commands::Arg::Role(n, v) => {
+                                    (format!("Role `{n}`"), v.mention().to_string())
+                                }
+                                commands::Arg::Mentionable(n, v) => {
+                                    (format!("Mentionable `{n}`"), v.mention().to_string())
+                                }
+                                commands::Arg::Attachment(n, v) => {
+                                    (format!("Attachment `{n}`"), v.url.to_owned())
+                                }
                             };
 
                             e.field(name, value, true);
